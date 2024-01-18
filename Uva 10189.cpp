@@ -1,72 +1,65 @@
 #include<stdio.h>
-int main()
-{
-
-
-
-
-    char a[10][10],b[10][10];
-    int i,j,m,n,count;
-    scanf("%d%d",&m,&n);
-    for (i=0;i<m;i++)
-    {
-         for (j=0;j<n;j++)
-         {
-              scanf(" %c",&a[i][j]);
-         }
+int main(){
+    int n,m,i,j,x=0;
+    while(scanf("%d %d",&n,&m)){
+        if(n==0&&m==0)
+            break;
+        if(x>0)
+            printf("\n");
+        char arr[n][m];
+        for(i=0;i<n;i++){
+            for(j=0;j<m;j++){
+                scanf(" %c",&arr[i][j]);
+                if(arr[i][j]!='*')
+                    arr[i][j]=0;
+            }
+        }
+        for(i=0;i<n;i++){
+            for(j=0;j<m;j++){
+                if(arr[i][j]=='*')
+                    continue;
+                if(j!=0&&arr[i][j-1]=='*')
+                    arr[i][j]+=1;
+                if(j!=m-1&&arr[i][j+1]=='*')
+                    arr[i][j]+=1;
+                if(i!=0&&j!=0&&arr[i-1][j-1]=='*')
+                    arr[i][j]+=1;
+                if(i!=0&&arr[i-1][j]=='*')
+                    arr[i][j]+=1;
+                if(i!=0&&j!=m-1&&arr[i-1][j+1]=='*')
+                    arr[i][j]+=1;
+                if(i!=n-1&&j!=0&&arr[i+1][j-1]=='*')
+                    arr[i][j]+=1;
+                if(i!=n-1&&arr[i+1][j]=='*')
+                    arr[i][j]+=1;
+                if(i!=n-1&&j!=m-1&&arr[i+1][j+1]=='*')
+                    arr[i][j]+=1;
+            }
+        }
+        x++;
+        printf("Field #%d:\n",x);
+        for(i=0;i<n;i++){
+            for(j=0;j<m;j++){
+                if(arr[i][j]=='*')
+                    printf("*");
+                else
+                    printf("%d",arr[i][j]);
+            }
+            printf("\n");
+        }
     }
-    for (i=0;i<m;i++)
-    {
-         for ( j=0;j<n;j++)
-            count=0;
-         if (a[i][j]!='*')
-         {
-              if (a[i-1][j-1]=='*'&& (i-1>=0) && (j-1>=0))
-              {
-
-               count++;}
-               if (a[i-1][j]='*'&& (i-1>=0))
-               {
-                   count++;
-               }
-               if (a[i-1][j+1]=='*'&& (i-1>=0) && (j+1<=n-1))
-               {
-                    count++;
-               }
-               if (a[i][j-1]=='*' && (j-1>=0))
-               {
-                    count++;
-               }
-
-               if (a[i][j+1]=='*' && (j+1<=n-1))
-               {
-                    count++;
-               }
-               if (a[i+1][j-1]=='*' && (i+1<=m)&&(j-1>=0))
-               {
-                    count++;
-               }
-               if (a[i+1][j]=='*' && (i+1<=m-1))
-               {
-                    count++;
-               }
-               if (a[i=1][j+1]=='*' && (i+1<=m-1) && (j+1<=n-1))
-               {
-                   count++;
-               }
-               b[i][j]=count;}
-               else
-                { b[i][j]='*';}
-
-
-
-
-                         printf("%c ",b[i][j]);
-                    }
-
-return 0;}
+return 0;
+}
 
 
 
 
 
+
+
+
+
+
+
+
+    
